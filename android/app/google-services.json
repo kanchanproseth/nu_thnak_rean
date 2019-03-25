@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "315331377671",
+    "firebase_url": "https://nuthnakrean.firebaseio.com",
+    "project_id": "nuthnakrean",
+    "storage_bucket": "nuthnakrean.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315331377671:android:70580f8821b773d5",
+        "android_client_info": {
+          "package_name": "edu.norton.nuthnakrean"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315331377671-l08qarvjdvjv6s2jjai6iogjd1q5qoa0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.norton.nuthnakrean",
+            "certificate_hash": "f377444818e7f1f8cd8f5de6b9d2bc02e86cc6cf"
+          }
+        },
+        {
+          "client_id": "315331377671-rlp0e4mqn5hvubqqa2j6brtm9fmhlb9u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo1pc4FEho1vsjwo-FwftGLtoWTDW--00"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315331377671-rlp0e4mqn5hvubqqa2j6brtm9fmhlb9u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "315331377671-56v2lboaqcc5hgct8igb3ipdjiig04dn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "edu.norton.nuThnakRean"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
