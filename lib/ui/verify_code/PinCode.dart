@@ -12,25 +12,26 @@ class PinCode extends StatefulWidget {
     // TODO: implement createState
     return PinCodeState();
   }
+
   PinCode({Key key, @required this.verificationId}) : super(key: key);
 }
 
-class PinCodeState extends State<PinCode>{
+class PinCodeState extends State<PinCode> {
   var _auth = FirebaseAuth.instance;
   // var pin_put_bloc = PinPutBloc();
   // var pin_put_state = PinPutState();
   String userid;
-  
-  void navigateToRegister(BuildContext context, String userID){
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => RegisterScreenWidget(userid: userID))
-  );
+
+  void navigateToRegister(BuildContext context, String userID) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => RegisterScreenWidget(userid: userID)));
   }
 
   Future<bool> _signInWithPhoneNumber(
       String smsCode, String verificationId) async {
-      var credential = PhoneAuthProvider.getCredential(
+    var credential = PhoneAuthProvider.getCredential(
       verificationId: verificationId,
       smsCode: smsCode,
     );
@@ -41,14 +42,14 @@ class PinCodeState extends State<PinCode>{
       final FirebaseUser currentUser = await _auth.currentUser();
       assert(user.uid == currentUser.uid);
       this.userid = user.uid;
-    return true;
+      return true;
     } catch (e) {
       return false;
     }
   }
 
   void _showSnackBar(bool result, String userid, BuildContext context) {
-    if (result == true){
+    if (result == true) {
       final snackBar = SnackBar(
         duration: Duration(seconds: 1),
         content: Container(
@@ -64,7 +65,7 @@ class PinCodeState extends State<PinCode>{
       Scaffold.of(context).showSnackBar(snackBar);
       print("sign in success");
       navigateToRegister(context, userid);
-    }else{
+    } else {
       final snackBar = SnackBar(
         duration: Duration(seconds: 1),
         content: Container(
@@ -79,24 +80,24 @@ class PinCodeState extends State<PinCode>{
       );
       Scaffold.of(context).showSnackBar(snackBar);
     }
-      
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10.0),
       child: Center(
         child: PinPut(
-          actionButtonsEnabled: false,
-          isTextObscure: true,
-          fieldsCount: 6,
-          onSubmit: (String pin) => {
-            this._signInWithPhoneNumber(pin, widget.verificationId).then((result) =>{
-              _showSnackBar(result, this.userid, context)
-            })
-            }
-        ),
+            autoFocus: true,
+            actionButtonsEnabled: false,
+            isTextObscure: true,
+            fieldsCount: 6,
+            onSubmit: (String pin) => {
+                  this._signInWithPhoneNumber(pin, widget.verificationId).then(
+                      (result) => {_showSnackBar(result, this.userid, context)})
+                }),
       ),
-    );;
+    );
+    ;
   }
 }

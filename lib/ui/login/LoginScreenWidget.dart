@@ -29,16 +29,7 @@ class LoginScreenWidget extends StatelessWidget {
               child: 
               AspectRatio(
                 aspectRatio: 100/100,
-                child: Container(
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image:  NetworkImage(
-                              "https://i.imgur.com/BoN9kdC.png")
-                              )
-                              )
-                              ),
+                child: Image.asset('assets/logo.png')
               ),
             ),
             Container(

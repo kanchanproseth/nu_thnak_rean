@@ -6,7 +6,7 @@ class VerifyCodeScreenWidget extends StatelessWidget {
   void onIDidnTGetACodePressed(BuildContext context) {}
 
   VerifyCodeScreenWidget({Key key, @required this.verificationId}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

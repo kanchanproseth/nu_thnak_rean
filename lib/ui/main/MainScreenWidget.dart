@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../drawer/MyDrawer.dart';
 import '../buttom_tab_bar/MainButtomBarWidget.dart';
 
-class MainScreenWidget extends StatelessWidget {
+class MainScreenWidget extends StatefulWidget {
+  @override
+  _MainScreenWidgetState createState() => _MainScreenWidgetState();
+}
+
+class _MainScreenWidgetState extends State<MainScreenWidget> with SingleTickerProviderStateMixin {
+  var tabController;
+  final List<Tab> myTabs = <Tab>[
+    new Tab(text: 'LEFT'),
+    new Tab(text: 'RIGHT'),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = new TabController(vsync: this, length: 3);
+  }
+
   void onIconsDarkMenuPressed(BuildContext context) {}
 
   void onShapePressed(BuildContext context) {}
+
+  void selectPage(int position) {
+    setState(() {
+      tabController.animateTo(position);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +50,7 @@ class MainScreenWidget extends StatelessWidget {
           ),
           drawer: MyDrawer(),
           body: TabBarView(
+            controller: tabController,
             children: [
               Container(
                 color: Colors.yellow,
@@ -40,7 +63,7 @@ class MainScreenWidget extends StatelessWidget {
               ),
             ],
           ),
-          bottomNavigationBar: MainButtomBarWidget(),
+          bottomNavigationBar: MainButtomBarWidget(this.selectPage),
           backgroundColor: Colors.white,
         ),
       ),
