@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
 import '../drawer/MyDrawer.dart';
 import '../buttom_tab_bar/MainButtomBarWidget.dart';
+import '../my_class/my_class_list_screen.dart';
+import '../../resources/my_class_api_provider.dart';
+import '../../models/my_class_model.dart';
 
 class MainScreenWidget extends StatefulWidget {
   @override
   _MainScreenWidgetState createState() => _MainScreenWidgetState();
 }
 
-class _MainScreenWidgetState extends State<MainScreenWidget> with SingleTickerProviderStateMixin {
+class _MainScreenWidgetState extends State<MainScreenWidget>
+    with SingleTickerProviderStateMixin {
   var tabController;
   final List<Tab> myTabs = <Tab>[
     new Tab(text: 'LEFT'),
     new Tab(text: 'RIGHT'),
   ];
 
+  List<MyClassModel> myClasses;
+  void initMyClassData() async {
+    myClasses = await MyClassApiProvider.fetchMyClassList(context);
+    print("MyClass: $myClasses");
+  }
+
   @override
   void initState() {
     super.initState();
     tabController = new TabController(vsync: this, length: 3);
+    initMyClassData();
   }
 
   void onIconsDarkMenuPressed(BuildContext context) {}
@@ -57,6 +68,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> with SingleTickerPr
               ),
               Container(
                 color: Colors.orange,
+                child: MyClassListScreen(
+                  myClasses: myClasses,
+                ),
               ),
               Container(
                 color: Colors.lightGreen,
