@@ -8,8 +8,6 @@ class MyClassApiProvider {
     final response = await DefaultAssetBundle.of(context).loadString("assets/my_class_list_mock_data.json");
     final List<dynamic> results = json.decode(response);
     final data = results.map((parsedJson) => MyClassModel.fromJson(parsedJson)).toList();
-    
-    print("Data: $data");
     return data;
   }
 }

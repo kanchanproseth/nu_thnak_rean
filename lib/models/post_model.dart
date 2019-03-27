@@ -1,0 +1,39 @@
+// enum PostType { Announcement, Assignment, File, Question }
+
+class PostModel {
+  final int id;
+  final String by;
+  final int numberOfComments;
+  final int numberOfAnswers;
+  final int numberOfDownloads;
+  final String createdAt;
+  final String postType;
+  final String status;
+
+  PostModel.fromJson(Map<String, dynamic> parsedJson)
+      : id = parsedJson['id'],
+        by = parsedJson['by'],
+        numberOfComments = parsedJson['numberOfComments'] ?? 0,
+        numberOfAnswers = parsedJson['numberOfAnswers'] ?? 0,
+        numberOfDownloads = parsedJson['numberOfDownloads'] ?? 0,
+        createdAt = parsedJson['createdAt'],
+        postType = parsedJson['postType'],
+        status = parsedJson['status'];
+
+  @override
+  String toString() {
+    print("""
+      {
+        "id": $id,
+        "by": $by,
+        "numberOfComments": $numberOfComments,
+        "numberOfAnswers": $numberOfAnswers,
+        "numberOfDownloads": $numberOfDownloads,
+        "createdAt": $createdAt,
+        "postType": $postType,
+        "status": $status
+      },
+    """);
+    return super.toString();
+  }
+}

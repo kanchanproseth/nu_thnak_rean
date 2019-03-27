@@ -4,13 +4,13 @@ import './ui/main/MainScreenWidget.dart';
 import './ui/splash_screen/MySplashScreenState.dart';
 import './ui/create_class/CreateClass.dart';
 import './ui/timeline/timeline_screen.dart';
+import './resources/post_api_provider.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
       title: "NU Tnak Rean",
       onGenerateRoute: routes,
@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
         });
       case '/timeline':
         return MaterialPageRoute(builder: (BuildContext context) {
-          return TimelineScreen();
+          final posts = PostApiProvider.fetchMyClassList(context);
+          return TimelineScreen(posts: posts,);
         });
       default:
         return MaterialPageRoute(builder: (BuildContext context) {

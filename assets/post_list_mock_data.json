@@ -1,0 +1,71 @@
+[{
+        "id": 1,
+        "by": "Kola Praka",
+        "numberOfComments": 50,
+        "numberOfAnswers": 20,
+        "createdAt": "2 Hours ago",
+        "postType": "Question",
+        "status": "Active"
+    },
+    {
+        "id": 2,
+        "by": "Patoka",
+        "numberOfComments": 390,
+        "createdAt": "2 Days ago",
+        "postType": "Announcement",
+        "status": "Active"
+    },
+    {
+        "id": 3,
+        "by": "Moka",
+        "numberOfComments": 290,
+        "numberOfDownloads": 60,
+        "createdAt": "2 minutes ago",
+        "postType": "File",
+        "status": "Active"
+    },
+    {
+        "id": 4,
+        "by": "Konia",
+        "numberOfComments": 230,
+        "numberOfDownloads": 120,
+        "createdAt": "9 minutes ago",
+        "postType": "Assigment",
+        "status": "Expired"
+    },
+    {
+        "id": 5,
+        "by": "Kola Praka",
+        "numberOfComments": 50,
+        "numberOfAnswers": 20,
+        "createdAt": "2 Hours ago",
+        "postType": "Question",
+        "status": "Active"
+    },
+    {
+        "id": 6,
+        "by": "Patoka",
+        "numberOfComments": 390,
+        "createdAt": "2 Days ago",
+        "postType": "Announcement",
+        "status": "Active"
+    },
+    {
+        "id": 7,
+        "by": "Moka",
+        "numberOfComments": 290,
+        "numberOfDownloads": 60,
+        "createdAt": "2 minutes ago",
+        "postType": "File",
+        "status": "Active"
+    },
+    {
+        "id": 8,
+        "by": "Konia",
+        "numberOfComments": 230,
+        "numberOfDownloads": 120,
+        "createdAt": "9 minutes ago",
+        "postType": "Assigment",
+        "status": "Expired"
+    }
+]
