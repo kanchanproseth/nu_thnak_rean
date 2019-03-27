@@ -13,10 +13,6 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget>
     with SingleTickerProviderStateMixin {
   var tabController;
-  final List<Tab> myTabs = <Tab>[
-    new Tab(text: 'LEFT'),
-    new Tab(text: 'RIGHT'),
-  ];
 
   List<MyClassModel> myClasses;
   void initMyClassData() async {
@@ -44,8 +40,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MaterialApp(
-      home: DefaultTabController(
+    return Scaffold(
+      body: DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(

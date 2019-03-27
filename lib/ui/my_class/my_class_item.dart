@@ -29,7 +29,7 @@ class MyClassItem extends StatelessWidget {
         ),
       ),
       onTap: () {
-        _alert(context, "Item Tapped");
+        Navigator.pushNamed(context, "/timeline");
       },
     );
   }
