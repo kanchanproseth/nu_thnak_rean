@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../buttom_tab_bar/timeline_bottom_tab_bar.dart';
 import '../../models/post_model.dart';
+import './post_list.dart';
 
 class TimelineScreen extends StatefulWidget {
   final Future<List<PostModel>> posts;
@@ -14,6 +15,7 @@ class TimelineScreen extends StatefulWidget {
 class _TimelineScreenState extends State<TimelineScreen>
     with SingleTickerProviderStateMixin {
   int currentIndex = 0;
+  var _widgetOptions;
 
   void onIconsDarkMenuPressed(BuildContext context) {}
 
@@ -25,9 +27,31 @@ class _TimelineScreenState extends State<TimelineScreen>
     });
   }
 
-  initData() async {
-    final data = await widget.posts;
-    print("Data: $data");
+  initData() {
+    print("Data: ${widget.posts}");
+    _widgetOptions = [
+      Container(
+        color: Colors.grey,
+        child: PostList(
+          posts: widget.posts,
+        ),
+      ),
+      Container(
+        color: Colors.orange,
+      ),
+      Container(
+        color: Colors.lightGreen,
+      ),
+      Container(
+        color: Colors.yellow,
+      ),
+      Container(
+        color: Colors.orange,
+      ),
+      Container(
+        color: Colors.lightGreen,
+      ),
+    ];
   }
 
   @override
@@ -36,27 +60,6 @@ class _TimelineScreenState extends State<TimelineScreen>
 
     initData();
   }
-
-  final _widgetOptions = [
-    Container(
-      color: Colors.yellow,
-    ),
-    Container(
-      color: Colors.orange,
-    ),
-    Container(
-      color: Colors.lightGreen,
-    ),
-    Container(
-      color: Colors.yellow,
-    ),
-    Container(
-      color: Colors.orange,
-    ),
-    Container(
-      color: Colors.lightGreen,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {

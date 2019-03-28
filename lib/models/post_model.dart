@@ -6,6 +6,7 @@ class PostModel {
   final int numberOfComments;
   final int numberOfAnswers;
   final int numberOfDownloads;
+  final String content;
   final String createdAt;
   final String postType;
   final String status;
@@ -16,6 +17,7 @@ class PostModel {
         numberOfComments = parsedJson['numberOfComments'] ?? 0,
         numberOfAnswers = parsedJson['numberOfAnswers'] ?? 0,
         numberOfDownloads = parsedJson['numberOfDownloads'] ?? 0,
+        content =parsedJson['content'],
         createdAt = parsedJson['createdAt'],
         postType = parsedJson['postType'],
         status = parsedJson['status'];
@@ -29,6 +31,7 @@ class PostModel {
         "numberOfComments": $numberOfComments,
         "numberOfAnswers": $numberOfAnswers,
         "numberOfDownloads": $numberOfDownloads,
+        "content": $content,
         "createdAt": $createdAt,
         "postType": $postType,
         "status": $status

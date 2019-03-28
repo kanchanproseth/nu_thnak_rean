@@ -25,8 +25,8 @@ class TimelineBottomTabBar extends StatelessWidget {
             title: Text("")),
         BottomNavigationBarItem(
             activeIcon:
-                Icon(FontAwesomeIcons.questionCircle, color: Colors.blue),
-            icon: Icon(FontAwesomeIcons.questionCircle, color: Colors.grey),
+                Icon(FontAwesomeIcons.solidQuestionCircle, color: Colors.blue),
+            icon: Icon(FontAwesomeIcons.solidQuestionCircle, color: Colors.grey),
             title: Text("")),
         BottomNavigationBarItem(
             activeIcon: Icon(FontAwesomeIcons.bullhorn, color: Colors.blue),
