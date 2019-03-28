@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "NU Tnak Rean",
       onGenerateRoute: routes,
+      home: LoginScreenWidget()
     );
   }
 
