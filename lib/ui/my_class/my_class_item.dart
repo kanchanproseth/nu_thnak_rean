@@ -1,8 +1,16 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../models/my_class_model.dart';
 
 class MyClassItem extends StatelessWidget {
   final MyClassModel item;
+  final List<Color> colors = [
+    Colors.purple,
+    Colors.blueGrey,
+    Colors.redAccent,
+    Colors.tealAccent
+  ];
+  final random = Random();
 
   MyClassItem({this.item});
 
@@ -16,7 +24,7 @@ class MyClassItem extends StatelessWidget {
         // color: Colors.blue,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: Colors.blue,
+          color: colors.elementAt(random.nextInt(3)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +37,7 @@ class MyClassItem extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pushNamed(context, "/timeline");
+        Navigator.pushNamed(context, "/timeline/${item.id}");
       },
     );
   }
@@ -57,7 +65,7 @@ class MyClassItem extends StatelessWidget {
       children: <Widget>[
         Text(item.name,
             style: TextStyle(
-              fontSize: 22.0,
+              fontSize: 20.0,
               color: Colors.white,
             )),
         Spacer(flex: 1),

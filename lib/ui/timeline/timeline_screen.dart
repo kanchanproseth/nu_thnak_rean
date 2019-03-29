@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import '../buttom_tab_bar/timeline_bottom_tab_bar.dart';
+import '../../models/post_model.dart';
+import './post_list.dart';
+import '../../models/my_class_model.dart';
 
 class TimelineScreen extends StatefulWidget {
+  final Future<List<PostModel>> posts;
+  final Future<MyClassModel> myClass;
+
+  TimelineScreen({this.posts, this.myClass});
+
   @override
   _TimelineScreenState createState() => _TimelineScreenState();
 }
 
 class _TimelineScreenState extends State<TimelineScreen>
     with SingleTickerProviderStateMixin {
-  // var tabController;
   int currentIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    // tabController = new TabController(vsync: this, length: 6);
-  }
+  var _widgetOptions;
 
   void onIconsDarkMenuPressed(BuildContext context) {}
 
@@ -27,26 +29,40 @@ class _TimelineScreenState extends State<TimelineScreen>
     });
   }
 
-  final _widgetOptions = [
-    Container(
-      color: Colors.yellow,
-    ),
-    Container(
-      color: Colors.orange,
-    ),
-    Container(
-      color: Colors.lightGreen,
-    ),
-    Container(
-      color: Colors.yellow,
-    ),
-    Container(
-      color: Colors.orange,
-    ),
-    Container(
-      color: Colors.lightGreen,
-    ),
-  ];
+  initData() {
+    print("Data: ${widget.posts}");
+    _widgetOptions = [
+      Container(
+        color: Colors.grey,
+        child: PostList(
+          posts: widget.posts,
+          myClass: widget.myClass,
+        ),
+      ),
+      Container(
+        color: Colors.orange,
+      ),
+      Container(
+        color: Colors.lightGreen,
+      ),
+      Container(
+        color: Colors.yellow,
+      ),
+      Container(
+        color: Colors.orange,
+      ),
+      Container(
+        color: Colors.lightGreen,
+      ),
+    ];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    initData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +72,7 @@ class _TimelineScreenState extends State<TimelineScreen>
         child: Scaffold(
           appBar: AppBar(
             brightness: Brightness.dark,
-            title: Text(" Timelines"),
+            title: Text("Timelines"),
             actions: [
               IconButton(
                 onPressed: () => this.onShapePressed(context),

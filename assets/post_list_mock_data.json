@@ -1,0 +1,79 @@
+[{
+        "id": 1,
+        "by": "Kola Praka",
+        "numberOfComments": 50,
+        "numberOfAnswers": 20,
+        "content": "This is type of Post File: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+        "createdAt": "2 Hours ago",
+        "postType": "Question",
+        "status": "Active"
+    },
+    {
+        "id": 2,
+        "by": "Patoka",
+        "numberOfComments": 390,
+        "content": "This is type of Annoument: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+        "createdAt": "2 Days ago",
+        "postType": "Announcement",
+        "status": "Active"
+    },
+    {
+        "id": 3,
+        "by": "Moka",
+        "numberOfComments": 290,
+        "numberOfDownloads": 60,
+        "content": "This is type of Question: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+        "createdAt": "2 minutes ago",
+        "postType": "File",
+        "status": "Active"
+    },
+    {
+        "id": 4,
+        "by": "Konia",
+        "numberOfComments": 230,
+        "numberOfDownloads": 120,
+        "content": "This is type of Assingment: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+        "createdAt": "9 minutes ago",
+        "postType": "Assigment",
+        "status": "Expired"
+    },
+    {
+        "id": 5,
+        "by": "Kola Praka",
+        "numberOfComments": 50,
+        "numberOfAnswers": 20,
+        "content": "This is type of Member post to ask something: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC…",
+        "createdAt": "2 Hours ago",
+        "postType": "Question",
+        "status": "Active"
+    },
+    {
+        "id": 6,
+        "by": "Patoka",
+        "numberOfComments": 390,
+        "createdAt": "2 Days ago",
+        "content": "This is type of Post File: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+        "postType": "Announcement",
+        "status": "Active"
+    },
+    {
+        "id": 7,
+        "by": "Moka",
+        "numberOfComments": 290,
+        "numberOfDownloads": 60,
+        "createdAt": "2 minutes ago",
+        "content": "This is type of Post File: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+        "postType": "File",
+        "status": "Active"
+    },
+    {
+        "id": 8,
+        "by": "Konia",
+        "numberOfComments": 230,
+        "numberOfDownloads": 120,
+        "createdAt": "9 minutes ago",
+        "content": "This is type of Post File: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+        "postType": "Assigment",
+        "status": "Expired"
+    }
+]

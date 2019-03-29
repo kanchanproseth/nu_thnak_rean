@@ -17,7 +17,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
   List<MyClassModel> myClasses;
   void initMyClassData() async {
     myClasses = await MyClassApiProvider.fetchMyClassList(context);
-    print("MyClass: $myClasses");
   }
 
   @override

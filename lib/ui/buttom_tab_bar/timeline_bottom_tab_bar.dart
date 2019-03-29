@@ -12,8 +12,8 @@ class TimelineBottomTabBar extends StatelessWidget {
     return BottomNavigationBar(
       items: [
         BottomNavigationBarItem(
-            activeIcon: Icon(FontAwesomeIcons.home, color: Colors.blue),
-            icon: Icon(FontAwesomeIcons.home, color: Colors.grey),
+            activeIcon: Icon(FontAwesomeIcons.chartLine, color: Colors.blue),
+            icon: Icon(FontAwesomeIcons.chartLine, color: Colors.grey),
             title: Text("")),
         BottomNavigationBarItem(
             activeIcon: Icon(FontAwesomeIcons.suitcase, color: Colors.blue),
@@ -25,8 +25,8 @@ class TimelineBottomTabBar extends StatelessWidget {
             title: Text("")),
         BottomNavigationBarItem(
             activeIcon:
-                Icon(FontAwesomeIcons.questionCircle, color: Colors.blue),
-            icon: Icon(FontAwesomeIcons.questionCircle, color: Colors.grey),
+                Icon(FontAwesomeIcons.solidQuestionCircle, color: Colors.blue),
+            icon: Icon(FontAwesomeIcons.solidQuestionCircle, color: Colors.grey),
             title: Text("")),
         BottomNavigationBarItem(
             activeIcon: Icon(FontAwesomeIcons.bullhorn, color: Colors.blue),
