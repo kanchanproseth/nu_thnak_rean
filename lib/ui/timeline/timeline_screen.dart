@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import '../buttom_tab_bar/timeline_bottom_tab_bar.dart';
 import '../../models/post_model.dart';
 import './post_list.dart';
+import '../../models/my_class_model.dart';
 
 class TimelineScreen extends StatefulWidget {
   final Future<List<PostModel>> posts;
+  final Future<MyClassModel> myClass;
 
-  TimelineScreen({this.posts});
+  TimelineScreen({this.posts, this.myClass});
 
   @override
   _TimelineScreenState createState() => _TimelineScreenState();
@@ -34,6 +36,7 @@ class _TimelineScreenState extends State<TimelineScreen>
         color: Colors.grey,
         child: PostList(
           posts: widget.posts,
+          myClass: widget.myClass,
         ),
       ),
       Container(
