@@ -13,10 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "NU Tnak Rean",
-      onGenerateRoute: routes,
-      home: LoginScreenWidget()
-    );
+        title: "NU Tnak Rean",
+        onGenerateRoute: routes,
+        home: MainScreenWidget());
   }
 
   Route routes(RouteSettings settings) {
@@ -27,12 +26,24 @@ class MyApp extends StatelessWidget {
     } else if (settings.name.contains('/timeline')) {
       return MaterialPageRoute(builder: (BuildContext context) {
         final posts = PostApiProvider.fetchMyClassList(context);
+        final classworks =
+            PostApiProvider.fetchMyClassListByType(context, 'File');
+        final assignments =
+            PostApiProvider.fetchMyClassListByType(context, 'Assigment');
+        final questions =
+            PostApiProvider.fetchMyClassListByType(context, 'Question');
+        final announcements =
+            PostApiProvider.fetchMyClassListByType(context, 'Announcement');
         final myClassId =
             int.parse(settings.name.replaceFirst("/timeline/", ""));
         final myClass = MyClassApiProvider.fetchMyClassById(context, myClassId);
         return TimelineScreen(
           posts: posts,
           myClass: myClass,
+          classworks: classworks,
+          assignments: assignments,
+          questions: questions,
+          announcements: announcements,
         );
       });
     }

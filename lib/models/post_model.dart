@@ -8,7 +8,7 @@ class PostModel {
   final int numberOfDownloads;
   final String content;
   final String createdAt;
-  final String postType;
+  String postType;
   final String status;
 
   PostModel.fromJson(Map<String, dynamic> parsedJson)

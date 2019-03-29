@@ -2,13 +2,35 @@ import 'package:flutter/material.dart';
 import '../buttom_tab_bar/timeline_bottom_tab_bar.dart';
 import '../../models/post_model.dart';
 import './post_list.dart';
+import './class_work_list.dart';
+import './assigment_list.dart';
+import './question_list.dart';
+import './announcement_list.dart';
 import '../../models/my_class_model.dart';
 
 class TimelineScreen extends StatefulWidget {
   final Future<List<PostModel>> posts;
+  final Future<List<PostModel>> classworks;
+  final Future<List<PostModel>> assignments;
+  final Future<List<PostModel>> questions;
+  final Future<List<PostModel>> announcements;
   final Future<MyClassModel> myClass;
+  final List<String> titles = [
+    'Timeline',
+    'Classwork',
+    'Assigment',
+    'Question Exam',
+    'Announcement',
+    'Activities'
+  ];
 
-  TimelineScreen({this.posts, this.myClass});
+  TimelineScreen(
+      {this.posts,
+      this.myClass,
+      this.classworks,
+      this.assignments,
+      this.questions,
+      this.announcements});
 
   @override
   _TimelineScreenState createState() => _TimelineScreenState();
@@ -30,7 +52,6 @@ class _TimelineScreenState extends State<TimelineScreen>
   }
 
   initData() {
-    print("Data: ${widget.posts}");
     _widgetOptions = [
       Container(
         color: Colors.grey,
@@ -40,16 +61,32 @@ class _TimelineScreenState extends State<TimelineScreen>
         ),
       ),
       Container(
-        color: Colors.orange,
+        color: Colors.grey,
+        child: ClassworkList(
+          posts: widget.classworks,
+          myClass: widget.myClass,
+        ),
       ),
       Container(
-        color: Colors.lightGreen,
+        color: Colors.grey,
+        child: AssignmentList(
+          posts: widget.assignments,
+          myClass: widget.myClass,
+        ),
       ),
       Container(
-        color: Colors.yellow,
+        color: Colors.grey,
+        child: QuestionList(
+          posts: widget.questions,
+          myClass: widget.myClass,
+        ),
       ),
       Container(
-        color: Colors.orange,
+        color: Colors.grey,
+        child: AnnouncementList(
+          posts: widget.announcements,
+          myClass: widget.myClass,
+        ),
       ),
       Container(
         color: Colors.lightGreen,
@@ -72,7 +109,7 @@ class _TimelineScreenState extends State<TimelineScreen>
         child: Scaffold(
           appBar: AppBar(
             brightness: Brightness.dark,
-            title: Text("Timelines"),
+            title: Text(widget.titles[currentIndex]),
             actions: [
               IconButton(
                 onPressed: () => this.onShapePressed(context),
