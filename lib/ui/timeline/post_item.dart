@@ -73,10 +73,10 @@ class PostItem extends StatelessWidget {
 
   Widget _buildPostType() {
     var btnTitle = '';
-    var icon = post.postType == 'File'
+    var icon = post.postType.contains('File') 
         ? Icon(FontAwesomeIcons.fileArchive, color: Colors.deepOrangeAccent)
         : Icon(FontAwesomeIcons.book, color: Colors.grey);
-    if (post.postType == 'File' || post.postType == 'Assigment') {
+    if (post.postType.contains('File')  || post.postType.contains('Assigment')) {
       btnTitle = 'Download';
     } else {
       btnTitle = 'Answer';
@@ -84,7 +84,7 @@ class PostItem extends StatelessWidget {
     }
 
     var postType =
-        post.postType == 'Question' ? "Where is Cambodia?" : post.postType;
+        post.postType.contains('Question') ? "Where is Cambodia?" : post.postType;
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 15),
