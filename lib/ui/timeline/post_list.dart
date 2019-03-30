@@ -98,6 +98,9 @@ class PostList extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: TextField(
+                      maxLines: null,
+                      maxLengthEnforced: false,
+                      keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Post something to your class",
