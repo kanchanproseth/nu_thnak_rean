@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../models/user_model.dart';
 import '../../../models/my_class_model.dart';
 import '../widgets/add_member_list_tile.dart';
+import '../../widgets/loading_indicator.dart';
 
 class AddClassMember extends StatelessWidget {
   final Future<List<UserModel>> members;
@@ -45,9 +46,7 @@ class AddClassMember extends StatelessWidget {
       return await members;
     }), builder:
         (BuildContext context, AsyncSnapshot<List<UserModel>> members) {
-      if (members.data == null) {
-        return Text("Loading....");
-      }
+      if (members.data == null) return LoadingIndicator();
       return ListView.builder(
         itemCount: members.data == null ? 1 : members.data.length + 1,
         itemBuilder: (BuildContext context, int index) =>

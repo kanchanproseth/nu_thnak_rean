@@ -16,18 +16,19 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final myClasses = MyClassApiProvider.fetchMyClassList(context);
+    final posts = PostApiProvider.fetchPostList(context);
     return MaterialApp(
         title: "NU Tnak Rean",
         onGenerateRoute: routes,
-        home: MainScreenWidget());
+        home: MainScreenWidget(
+          myClasses: myClasses,
+          posts: posts,
+        ));
   }
 
   Route routes(RouteSettings settings) {
-    if (settings.name == '/') {
-      return MaterialPageRoute(builder: (BuildContext context) {
-        return MainScreenWidget();
-      });
-    } else if (settings.name.contains('/timeline')) {
+    if (settings.name.contains('/timeline')) {
       return MaterialPageRoute(builder: (BuildContext context) {
         final posts = PostApiProvider.fetchPostList(context);
         final classworks = PostApiProvider.fetchPostListByType(context, 'File');
@@ -73,7 +74,9 @@ class MyApp extends StatelessWidget {
       });
     }
     return MaterialPageRoute(builder: (BuildContext context) {
-      return MainScreenWidget();
+      final myClasses = MyClassApiProvider.fetchMyClassList(context);
+      final posts = PostApiProvider.fetchPostList(context);
+      return MainScreenWidget(myClasses: myClasses, posts: posts);
     });
   }
 }
