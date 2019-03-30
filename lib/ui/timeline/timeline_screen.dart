@@ -58,6 +58,7 @@ class _TimelineScreenState extends State<TimelineScreen>
         child: PostList(
           posts: widget.posts,
           myClass: widget.myClass,
+          shouldShowPostCreationInput: true,
         ),
       ),
       Container(
