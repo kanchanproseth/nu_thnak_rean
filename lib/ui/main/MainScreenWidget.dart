@@ -4,6 +4,8 @@ import '../buttom_tab_bar/MainButtomBarWidget.dart';
 import '../my_class/my_class_list_screen.dart';
 import '../../resources/my_class_api_provider.dart';
 import '../../models/my_class_model.dart';
+import '../create_class/CreateClass.dart';
+import '../new_notification/NewNotification.dart';
 
 class MainScreenWidget extends StatefulWidget {
   @override
@@ -19,6 +21,17 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
     myClasses = await MyClassApiProvider.fetchMyClassList(context);
   }
 
+  void createClass(){
+  Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CreateClass(title: "Create class",)),
+    );
+  }
+
+  void joinClass(){
+    
+  }
+
   @override
   void initState() {
     super.initState();
@@ -28,7 +41,27 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
 
   void onIconsDarkMenuPressed(BuildContext context) {}
 
-  void onShapePressed(BuildContext context) {}
+  void onShapePressed(BuildContext context) {
+    showModalBottomSheet(
+    context: context,
+    builder: (context) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.add_circle),
+            title: Text('Create Class'),
+            onTap: () => this.createClass(),          
+          ),
+          ListTile(
+            leading: Icon(Icons.insert_link),
+            title: Text('Join Class'),
+            onTap: () => this.joinClass(),        
+          ),
+        ],
+      );
+    });
+  }
 
   void selectPage(int position) {
     setState(() {
@@ -51,7 +84,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
                 icon: Icon(Icons.add),
               ),
             ],
-            backgroundColor: Color.fromARGB(255, 0, 176, 255),
           ),
           drawer: MyDrawer(),
           body: TabBarView(
@@ -61,13 +93,12 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
                 color: Colors.yellow,
               ),
               Container(
-                color: Colors.orange,
                 child: MyClassListScreen(
                   myClasses: myClasses,
                 ),
               ),
               Container(
-                color: Colors.lightGreen,
+                child: NewNotification(),
               ),
             ],
           ),

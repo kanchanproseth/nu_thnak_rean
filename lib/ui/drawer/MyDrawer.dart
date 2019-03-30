@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MyDrawer extends StatelessWidget {
-
   
+  void showProfile(){}
+
+  void showSettingProfile(){}
+
+  void showAboutUs(){}
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class MyDrawer extends StatelessWidget {
                     backgroundColor:
                         Theme.of(context).platform == TargetPlatform.iOS
                             ? Colors.white
-                            : Colors.blue,
+                            : Colors.amber,
                     child: Text(
                       "P",
                       style: TextStyle(fontSize: 40.0),
@@ -26,24 +31,18 @@ class MyDrawer extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  title: Text("My Class"),
-                  leading: Icon(FontAwesomeIcons.home),
-                ),
-                ListTile(
                   title: Text("Profile"),
                   leading: Icon(FontAwesomeIcons.user),
-                ),
-                ListTile(
-                  title: Text("Create Class"),
-                  leading: Icon(FontAwesomeIcons.plusCircle),
-                ),
-                ListTile(
-                  title: Text("Join Class"),
-                  leading: Icon(FontAwesomeIcons.link),
+                  onTap:  (){
+
+                  },
                 ),
                 ListTile(
                   title: Text("About Us"),
                   leading: Icon(FontAwesomeIcons.fileContract),
+                  onTap: (){
+
+                  },
                 ),
                 ListTile(
                   title: Text("Feedback"),
@@ -56,6 +55,9 @@ class MyDrawer extends StatelessWidget {
                 ListTile(
                   title: Text("Setting"),
                   leading: Icon(Icons.settings),
+                  onTap: (){
+
+                  },
                 ),
               ],
             ),

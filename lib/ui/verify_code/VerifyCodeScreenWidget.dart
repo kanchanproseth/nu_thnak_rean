@@ -12,7 +12,7 @@ class VerifyCodeScreenWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Enter Verify Code"),
-        backgroundColor: Color.fromARGB(255, 0, 176, 255),
+        backgroundColor: Colors.amber,
       ),
       body: Builder(
         builder: (BuildContext context) {

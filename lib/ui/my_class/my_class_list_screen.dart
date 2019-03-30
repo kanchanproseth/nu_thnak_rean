@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/my_class_model.dart';
 import './my_class_item.dart';
+import '../empty_state/empty_state_widget.dart';
 
 class MyClassListScreen extends StatelessWidget {
   final List<MyClassModel> myClasses;
@@ -14,10 +15,16 @@ class MyClassListScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 244, 244, 244),
       ),
-      child: ListView.builder(
-        itemCount: myClasses.length,
-        itemBuilder: _itemBuilder,
-      ),
+      child: myClasses == null
+            ? EmptyStateWidget()
+            :buildMyClassListView(),
+    );
+  }
+
+  ListView buildMyClassListView() {
+    return ListView.builder(
+      itemCount: myClasses.length,
+      itemBuilder: _itemBuilder,
     );
   }
 

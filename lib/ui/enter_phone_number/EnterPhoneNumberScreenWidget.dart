@@ -13,7 +13,6 @@ class EnterPhoneNumberScreenWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Enter Phone Number"),
-        backgroundColor: Color.fromARGB(255, 0, 176, 255),
       ),
       body: EnterPhoneNumber()
     );

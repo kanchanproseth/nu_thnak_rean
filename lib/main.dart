@@ -14,6 +14,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: "NU Tnak Rean",
+        theme: Theme.of(context).copyWith(
+      accentIconTheme: Theme.of(context).accentIconTheme.copyWith(
+        color: Colors.white
+      ),
+      accentColor: Colors.amber,
+      primaryColor: Colors.amber,
+      primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
+        color: Colors.white
+      ),
+      primaryTextTheme: Theme
+          .of(context)
+          .primaryTextTheme
+          .apply(bodyColor: Colors.white)),
         onGenerateRoute: routes,
         home: MainScreenWidget());
   }

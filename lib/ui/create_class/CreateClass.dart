@@ -11,7 +11,7 @@ class ClassInformation {
 
 class CreateClass extends StatelessWidget {
   Function createClass;
-  // final String title;
+  final String title;
   var classInfo =ClassInformation();
 
   var classNameTextController = TextEditingController();
@@ -36,7 +36,7 @@ class CreateClass extends StatelessWidget {
       Scaffold.of(context).showSnackBar(snackBar);
   }
 
-  // CreateClass({Key key, @required this.title, this.createClass}) : super(key: key);
+  CreateClass({Key key, @required this.title, this.createClass}) : super(key: key);
   void onButtonCreatePressed(BuildContext context) {
     if (classNameTextController.text.isEmpty||
     classDescTextController.text.isEmpty||
@@ -61,7 +61,7 @@ class CreateClass extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // title: Text(this.title),
-        backgroundColor: Color.fromARGB(255, 0, 176, 255),
+        backgroundColor: Colors.amber,
       ),
       body: Builder(builder: (BuildContext context){
         return Container(
