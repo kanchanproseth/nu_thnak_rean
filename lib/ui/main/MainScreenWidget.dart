@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import '../drawer/MyDrawer.dart';
 import '../buttom_tab_bar/MainButtomBarWidget.dart';
 import '../my_class/my_class_list_screen.dart';
-import '../../resources/my_class_api_provider.dart';
 import '../../models/my_class_model.dart';
+import '../../models/post_model.dart';
+import '../widgets/loading_indicator.dart';
+import '../new_feeds/new_feed_list.dart';
 
 class MainScreenWidget extends StatefulWidget {
+  final Future<List<MyClassModel>> myClasses;
+  final Future<List<PostModel>> posts;
+
+  MainScreenWidget({this.myClasses, this.posts});
+
   @override
   _MainScreenWidgetState createState() => _MainScreenWidgetState();
 }
@@ -13,17 +20,13 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget>
     with SingleTickerProviderStateMixin {
   var tabController;
-
-  List<MyClassModel> myClasses;
-  void initMyClassData() async {
-    myClasses = await MyClassApiProvider.fetchMyClassList(context);
-  }
+  int currentIndex = 0;
+  final List<String> titles = ["New Feeds", "My Class", "Notification"];
 
   @override
   void initState() {
     super.initState();
     tabController = new TabController(vsync: this, length: 3);
-    initMyClassData();
   }
 
   void onIconsDarkMenuPressed(BuildContext context) {}
@@ -33,6 +36,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
   void selectPage(int position) {
     setState(() {
       tabController.animateTo(position);
+      currentIndex = position;
     });
   }
 
@@ -44,7 +48,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
         child: Scaffold(
           appBar: AppBar(
             brightness: Brightness.dark,
-            title: Text(" Feeds"),
+            title: Text(titles.elementAt(currentIndex)),
             actions: [
               IconButton(
                 onPressed: () => this.onShapePressed(context),
@@ -57,15 +61,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
           body: TabBarView(
             controller: tabController,
             children: [
-              Container(
-                color: Colors.yellow,
-              ),
-              Container(
-                color: Colors.orange,
-                child: MyClassListScreen(
-                  myClasses: myClasses,
-                ),
-              ),
+              _buildNewFeedsTab(),
+              _buildMyClassTab(),
               Container(
                 color: Colors.lightGreen,
               ),
@@ -75,6 +72,26 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
           backgroundColor: Colors.white,
         ),
       ),
+    );
+  }
+
+  Widget _buildMyClassTab() {
+    return FutureBuilder(future: Future(() async {
+      return await widget.myClasses;
+    }), builder:
+        (BuildContext context, AsyncSnapshot<List<MyClassModel>> myClasses) {
+      if (myClasses.data == null) return LoadingIndicator();
+      return Container(
+        child: MyClassListScreen(
+          myClasses: myClasses.data,
+        ),
+      );
+    });
+  }
+
+  Widget _buildNewFeedsTab() {
+    return Container(
+      child: NewFeedList(posts: widget.posts),
     );
   }
 }

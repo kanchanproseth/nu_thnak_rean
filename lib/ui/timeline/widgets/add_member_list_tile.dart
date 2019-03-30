@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../models/user_model.dart';
 import '../../../models/my_class_model.dart';
+import '../../widgets/loading_indicator.dart';
 
 class AddMemberListTile extends StatelessWidget {
   final UserModel member;
@@ -13,7 +14,7 @@ class AddMemberListTile extends StatelessWidget {
     return FutureBuilder(future: Future(() async {
       return await myClass;
     }), builder: (BuildContext context, AsyncSnapshot<MyClassModel> myClass) {
-      if (myClass.data == null) return Text('Loading...');
+      if (myClass.data == null) return LoadingIndicator();
       return _buildTile(myClass.data);
     });
   }

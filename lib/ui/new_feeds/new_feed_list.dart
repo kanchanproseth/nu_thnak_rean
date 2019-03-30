@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import '../../../models/post_model.dart';
-import '../post_item.dart';
-import '../../widgets/loading_indicator.dart';
+import '../../models/post_model.dart';
+import '../timeline/post_item.dart';
+import '../../models/my_class_model.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../widgets/loading_indicator.dart';
 
-class MyPostsList extends StatelessWidget {
-final String title;
+class NewFeedList extends StatelessWidget {
   final Future<List<PostModel>> posts;
 
-MyPostsList({this.title, this.posts});
+  NewFeedList(
+      {this.posts});
 
-@override
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Container(
+    return Container(
       constraints: BoxConstraints.expand(),
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 244, 244, 244),
@@ -29,16 +27,13 @@ MyPostsList({this.title, this.posts});
         return ListView.builder(
           itemCount: posts.data.length,
           itemBuilder: (BuildContext context, int index) =>
-              _itemBuilder(context, index, posts.data[index]),
+              _itemBuilder(context, index, posts.data),
         );
       }),
-    ),
     );
   }
 
-    Widget _itemBuilder(BuildContext context, int index, PostModel post) {
-    return PostItem(post: post);
+  Widget _itemBuilder(BuildContext context, int index, List<PostModel> posts) {
+    return PostItem(post: posts[index]);
   }
-
-
 }

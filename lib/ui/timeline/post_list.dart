@@ -3,6 +3,7 @@ import '../../models/post_model.dart';
 import './post_item.dart';
 import '../../models/my_class_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../widgets/loading_indicator.dart';
 
 class PostList extends StatelessWidget {
   final Future<List<PostModel>> posts;
@@ -24,9 +25,7 @@ class PostList extends StatelessWidget {
         return data;
       }), builder:
           (BuildContext context, AsyncSnapshot<List<PostModel>> posts) {
-        if (posts.data == null) {
-          return Text("Loading....");
-        }
+        if (posts.data == null) return LoadingIndicator();
         return ListView.builder(
           itemCount: posts.data == null ? 1 : posts.data.length + 1,
           itemBuilder: (BuildContext context, int index) =>
@@ -118,9 +117,7 @@ class PostList extends StatelessWidget {
       final data = await myClass;
       return data;
     }), builder: (BuildContext context, AsyncSnapshot<MyClassModel> myClass) {
-      if (myClass.data == null) {
-        return Text('Loading...');
-      }
+      if (myClass.data == null) return LoadingIndicator();
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
