@@ -7,8 +7,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class PostList extends StatelessWidget {
   final Future<List<PostModel>> posts;
   final Future<MyClassModel> myClass;
+  final bool shouldShowPostCreationInput;
 
-  PostList({this.posts, this.myClass});
+  PostList(
+      {this.posts, this.myClass, this.shouldShowPostCreationInput = false});
 
   @override
   Widget build(BuildContext context) {
@@ -74,35 +76,37 @@ class PostList extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10),
       margin: EdgeInsets.only(bottom: 0.5),
       color: Colors.white,
-      child: Row(
-        children: <Widget>[
-          Container(
-            height: 20,
-            width: 20,
-            margin: EdgeInsets.only(right: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.grey,
-            ),
-            child: Icon(
-              FontAwesomeIcons.userAlt,
-              size: 10,
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Post something to your class",
+      child: !shouldShowPostCreationInput
+          ? Row()
+          : Row(
+              children: <Widget>[
+                Container(
+                  height: 20,
+                  width: 20,
+                  margin: EdgeInsets.only(right: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.grey,
+                  ),
+                  child: Icon(
+                    FontAwesomeIcons.userAlt,
+                    size: 10,
+                  ),
                 ),
-              ),
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Post something to your class",
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 
