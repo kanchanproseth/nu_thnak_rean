@@ -6,6 +6,7 @@ import './class_work_list.dart';
 import './assigment_list.dart';
 import './question_list.dart';
 import './announcement_list.dart';
+import './class_activity_list.dart';
 import '../../models/my_class_model.dart';
 
 class TimelineScreen extends StatefulWidget {
@@ -89,9 +90,7 @@ class _TimelineScreenState extends State<TimelineScreen>
           myClass: widget.myClass,
         ),
       ),
-      Container(
-        color: Colors.lightGreen,
-      ),
+      ClassActivityList(),
     ];
   }
 
