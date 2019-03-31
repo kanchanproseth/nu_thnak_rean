@@ -116,7 +116,7 @@ class _TimelineScreenState extends State<TimelineScreen>
                 icon: Icon(Icons.file_download),
               ),
             ],
-            backgroundColor: Color.fromARGB(255, 0, 176, 255),
+            backgroundColor: Colors.amber,
           ),
           body: _widgetOptions.elementAt(currentIndex),
           bottomNavigationBar: TimelineBottomTabBar(

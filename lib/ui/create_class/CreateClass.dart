@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
-
-class ClassInformation {
-      String name;
-      String desc;
-      String session;
-      String roomname;
-      String subject;
-  // ClassInformation(this.name, this.desc, this.session, this.roomname, this.subject);
-}
+import 'package:firebase_database/firebase_database.dart';
+import '../../models/my_class_model.dart';
 
 class CreateClass extends StatelessWidget {
   Function createClass;
-  // final String title;
-  var classInfo =ClassInformation();
+  final String title;
+  DatabaseReference itemRef;
+  var _myClass = MyClassModel();
 
   var classNameTextController = TextEditingController();
   var classDescTextController = TextEditingController();
-  var sessionTextController = TextEditingController();
+  var sectionTextController = TextEditingController();
   var roomTextController = TextEditingController();
   var subjectTextController = TextEditingController();
 
@@ -36,22 +30,24 @@ class CreateClass extends StatelessWidget {
       Scaffold.of(context).showSnackBar(snackBar);
   }
 
-  // CreateClass({Key key, @required this.title, this.createClass}) : super(key: key);
+  CreateClass({Key key, @required this.title, this.createClass}) : super(key: key);
   void onButtonCreatePressed(BuildContext context) {
     if (classNameTextController.text.isEmpty||
     classDescTextController.text.isEmpty||
-    sessionTextController.text.isEmpty||
+    sectionTextController.text.isEmpty||
     roomTextController.text.isEmpty||
     subjectTextController.text.isEmpty){
     this._showSnackBar("Please enter all field", context);
     }else{
-      classInfo.name = classNameTextController.text;
-      classInfo.desc = classDescTextController.text;
-      classInfo.session = sessionTextController.text;
-      classInfo.roomname = roomTextController.text;
-      classInfo.subject = subjectTextController.text;
-      createClass(classInfo);
-      // Navigator.of(context).pop();
+      _myClass.name = classNameTextController.text;
+      _myClass.desc = classDescTextController.text;
+      _myClass.section = sectionTextController.text;
+      _myClass.room = roomTextController.text;
+      _myClass.subject = subjectTextController.text;
+      final FirebaseDatabase database = FirebaseDatabase.instance;
+      itemRef = database.reference().child('my_classes');
+      itemRef.push().set(_myClass.toJson());
+      Navigator.of(context).pop();
     }
   }
   
@@ -61,7 +57,7 @@ class CreateClass extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // title: Text(this.title),
-        backgroundColor: Color.fromARGB(255, 0, 176, 255),
+        backgroundColor: Colors.amber,
       ),
       body: Builder(builder: (BuildContext context){
         return Container(
@@ -146,7 +142,7 @@ class CreateClass extends StatelessWidget {
             constraints: BoxConstraints.expand(height: 44),
             margin: EdgeInsets.only(left: 35, top: 16),
             child: TextField(
-              controller: sessionTextController,
+              controller: sectionTextController,
               decoration: InputDecoration(
                 hintText: "Evening",
                 labelText: "Session",

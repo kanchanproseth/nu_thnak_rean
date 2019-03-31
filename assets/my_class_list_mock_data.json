@@ -1,33 +1,114 @@
-[{
-        "id": 1,
-        "name": "Master E-commerce 01",
-        "member": 50,
-        "section": "Evening",
-        "room": "G-001",
-        "subject": "E-commerce Marketing"
-    },
-    {
-        "id": 2,
-        "name": "Master Mobile App",
-        "member": 20,
-        "section": "Weekend",
-        "room": "G-001",
-        "subject": "Mobile Application"
-    },
-    {
-        "id": 3,
-        "name": "Weekend Master Marketing",
-        "member": 150,
-        "section": "Weekend",
-        "room": "G-001",
-        "subject": "Market"
-    },
-    {
-        "id": 4,
-        "name": "Photoshop Design",
-        "member": 40,
-        "section": "Morning",
-        "room": "G-001",
-        "subject": "Design"
+[
+  {
+    "id": "1",
+    "name": "Master E-commerce 01",
+    "description": "",
+    "member": [
+      {
+        "id": "1",
+        "name": "proseth",
+        "email": "kchanproseth@gmail.com",
+        "phone_number": "085574488"
+      },
+      {
+        "id": "2",
+        "name": "prasak",
+        "email": "prasak@gmail.com",
+        "phone_number": "085574488"
+      },
+      {
+        "id": "3",
+        "name": "Soksan",
+        "email": "Soksan@gmail.com",
+        "phone_number": "085574488"
     }
+    ],
+    "section": "Evening",
+    "room": "G-001",
+    "subject": "E-commerce Marketing"
+  },
+  {
+    "id": "2",
+    "name": "Master Mobile App",
+    "description": "",
+    "member": [
+      {
+        "id": "1",
+        "name": "proseth",
+        "email": "kchanproseth@gmail.com",
+        "phone_number": "085574488"
+      },
+      {
+        "id": "2",
+        "name": "prasak",
+        "email": "prasak@gmail.com",
+        "phone_number": "085574488"
+      },
+      {
+        "id": "3",
+        "name": "Soksan",
+        "email": "Soksan@gmail.com",
+        "phone_number": "085574488"
+    }
+    ],
+    "section": "Weekend",
+    "room": "G-001",
+    "subject": "Mobile Application"
+  },
+  {
+    "id": "3",
+    "name": "Weekend Master Marketing",
+    "description": "",
+    "member": [
+      {
+        "id": "1",
+        "name": "proseth",
+        "email": "kchanproseth@gmail.com",
+        "phone_number": "085574488"
+      },
+      {
+        "id": "2",
+        "name": "prasak",
+        "email": "prasak@gmail.com",
+        "phone_number": "085574488"
+      },
+      {
+        "id": "3",
+        "name": "Soksan",
+        "email": "Soksan@gmail.com",
+        "phone_number": "085574488"
+    }
+    ],
+    "section": "Weekend",
+    "room": "G-001",
+    "subject": "Market"
+  },
+  {
+    "id": "4",
+    "name": "Photoshop Design",
+    "description": "",
+    "member": [
+      {
+        "id": "1",
+        "name": "proseth",
+        "email": "kchanproseth@gmail.com",
+        "phone_number": "085574488"
+      },
+      {
+        "id": "2",
+        "name": "prasak",
+        "email": "prasak@gmail.com",
+        "phone_number": "085574488"
+      },
+      {
+        "id": "3",
+        "name": "Soksan",
+        "email": "Soksan@gmail.com",
+        "phone_number": "085574488"
+    }
+    ],
+    "section": "Morning",
+    "room": "G-001",
+    "subject": "Design"
+  }
 ]

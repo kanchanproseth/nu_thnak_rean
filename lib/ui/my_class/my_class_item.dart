@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../models/my_class_model.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class MyClassItem extends StatelessWidget {
   final MyClassModel item;
@@ -13,6 +14,14 @@ class MyClassItem extends StatelessWidget {
   final random = Random();
 
   MyClassItem({this.item});
+
+  void deleteClass(MyClassModel myClass) async {
+    final FirebaseDatabase database = FirebaseDatabase.instance;
+    var myClassref = database.reference().child('my_classes');
+    await myClassref.child(myClass.id).remove().then((_) {
+      print('Transaction  committed.');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +93,9 @@ class MyClassItem extends StatelessWidget {
 
   Widget _buildSectionAndMemberText() {
     return Text(
-      "${item.section}   ${item.member} member(s)",
+      item.member == null
+      ? "${item.section}   0 member(s)"
+      : "${item.section}   ${item.member.length} member(s)",
       style: TextStyle(
         color: Colors.white,
         fontSize: 14,
@@ -104,6 +115,7 @@ class MyClassItem extends StatelessWidget {
         GestureDetector(
           onTap: () {
             _alert(context, "Delete");
+            deleteClass(item);
           },
           child: Icon(
             Icons.delete,

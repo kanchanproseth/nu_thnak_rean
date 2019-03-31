@@ -3,9 +3,15 @@ import '../drawer/MyDrawer.dart';
 import '../buttom_tab_bar/MainButtomBarWidget.dart';
 import '../my_class/my_class_list_screen.dart';
 import '../../models/my_class_model.dart';
+<<<<<<< HEAD
+import '../create_class/CreateClass.dart';
+import '../new_notification/NewNotification.dart';
+import 'package:firebase_database/firebase_database.dart';
+=======
 import '../../models/post_model.dart';
 import '../widgets/loading_indicator.dart';
 import '../new_feeds/new_feed_list.dart';
+>>>>>>> 9c127cd6e9e849477d03f8476cb2e7109c11de9c
 
 class MainScreenWidget extends StatefulWidget {
   final Future<List<MyClassModel>> myClasses;
@@ -20,8 +26,36 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget>
     with SingleTickerProviderStateMixin {
   var tabController;
+<<<<<<< HEAD
+  DatabaseReference itemRef;
+  MyClassModel _myClass;
+
+  List<MyClassModel> myClasses;
+  void initMyClassData() async {
+    //mock
+    // myClasses = await MyClassApiProvider.fetchMyClassList(context);
+    // final FirebaseDatabase database = FirebaseDatabase.instance;
+    // itemRef = database.reference().child('my_classes');
+    // for (_myClass in myClasses){
+    //   itemRef.push().set(_myClass.toJson());
+    // }
+    
+  }
+
+  void createClass(){
+  Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CreateClass(title: "Create class",)),
+    );
+  }
+
+  void joinClass(){
+    
+  }
+=======
   int currentIndex = 0;
   final List<String> titles = ["New Feeds", "My Class", "Notification"];
+>>>>>>> 9c127cd6e9e849477d03f8476cb2e7109c11de9c
 
   @override
   void initState() {
@@ -31,7 +65,27 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
 
   void onIconsDarkMenuPressed(BuildContext context) {}
 
-  void onShapePressed(BuildContext context) {}
+  void onShapePressed(BuildContext context) {
+    showModalBottomSheet(
+    context: context,
+    builder: (context) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.add_circle),
+            title: Text('Create Class'),
+            onTap: () => this.createClass(),          
+          ),
+          ListTile(
+            leading: Icon(Icons.insert_link),
+            title: Text('Join Class'),
+            onTap: () => this.joinClass(),        
+          ),
+        ],
+      );
+    });
+  }
 
   void selectPage(int position) {
     setState(() {
@@ -55,7 +109,6 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
                 icon: Icon(Icons.add),
               ),
             ],
-            backgroundColor: Color.fromARGB(255, 0, 176, 255),
           ),
           drawer: MyDrawer(),
           body: TabBarView(
@@ -64,7 +117,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
               _buildNewFeedsTab(),
               _buildMyClassTab(),
               Container(
-                color: Colors.lightGreen,
+                child: NewNotification(),
               ),
             ],
           ),
@@ -83,9 +136,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
         (BuildContext context, AsyncSnapshot<List<MyClassModel>> myClasses) {
       if (myClasses.data == null) return LoadingIndicator();
       return Container(
-        child: MyClassListScreen(
-          myClasses: myClasses.data,
-        ),
+        child: MyClassListScreen(),
       );
     });
   }

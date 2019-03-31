@@ -18,7 +18,7 @@ class _MainButtomBarWidgetState extends State<MainButtomBarWidget> {
     tabs: [
         TabData(iconData: FontAwesomeIcons.home, title: "New Feed"),
         TabData(iconData: FontAwesomeIcons.bookReader, title: "My Class"),
-        TabData(iconData: FontAwesomeIcons.ring, title: "Notification")
+        TabData(iconData: Icons.notifications, title: "Notification")
     ], 
     onTabChangedListener: (position) {
         setState(() {
