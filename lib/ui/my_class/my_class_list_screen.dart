@@ -62,10 +62,4 @@ class _MyClassListScreenState extends State<MyClassListScreen> {
       },
     );
   }
-
-  // Widget _itemBuilder(BuildContext context, int index) {
-  //   return MyClassItem(
-  //     item: widget.myClasses[index],
-  //   );
-  // }
 }

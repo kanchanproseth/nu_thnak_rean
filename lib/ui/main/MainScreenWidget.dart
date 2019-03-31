@@ -3,15 +3,12 @@ import '../drawer/MyDrawer.dart';
 import '../buttom_tab_bar/MainButtomBarWidget.dart';
 import '../my_class/my_class_list_screen.dart';
 import '../../models/my_class_model.dart';
-<<<<<<< HEAD
 import '../create_class/CreateClass.dart';
 import '../new_notification/NewNotification.dart';
 import 'package:firebase_database/firebase_database.dart';
-=======
 import '../../models/post_model.dart';
 import '../widgets/loading_indicator.dart';
 import '../new_feeds/new_feed_list.dart';
->>>>>>> 9c127cd6e9e849477d03f8476cb2e7109c11de9c
 
 class MainScreenWidget extends StatefulWidget {
   final Future<List<MyClassModel>> myClasses;
@@ -26,7 +23,6 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget>
     with SingleTickerProviderStateMixin {
   var tabController;
-<<<<<<< HEAD
   DatabaseReference itemRef;
   MyClassModel _myClass;
 
@@ -52,10 +48,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
   void joinClass(){
     
   }
-=======
   int currentIndex = 0;
   final List<String> titles = ["New Feeds", "My Class", "Notification"];
->>>>>>> 9c127cd6e9e849477d03f8476cb2e7109c11de9c
 
   @override
   void initState() {
@@ -129,16 +123,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
   }
 
   Widget _buildMyClassTab() {
-    return FutureBuilder(future: Future(() async {
-      Future.delayed(Duration(seconds: 3), () {});
-      return await widget.myClasses;
-    }), builder:
-        (BuildContext context, AsyncSnapshot<List<MyClassModel>> myClasses) {
-      if (myClasses.data == null) return LoadingIndicator();
-      return Container(
-        child: MyClassListScreen(),
-      );
-    });
+    return MyClassListScreen();
   }
 
   Widget _buildNewFeedsTab() {
