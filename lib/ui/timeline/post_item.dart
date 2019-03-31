@@ -13,13 +13,21 @@ class PostItem extends StatelessWidget {
       margin: EdgeInsets.only(top: 5),
       padding: EdgeInsets.all(10),
       color: Colors.white,
-      child: Column(
-        children: <Widget>[
-          _buildHeader(),
-          Text(post.content),
-          post.postType == 'Announcement' ? Text('') : _buildPostType(),
-          _buildStatistic(),
-        ],
+      child: GestureDetector(
+        onTap: () {
+          if (post.postType.contains("Question")) {
+            return ;
+          }
+          Navigator.pushNamed(context, "/post_detail/${post.id}");
+        },
+        child: Column(
+          children: <Widget>[
+            _buildHeader(),
+            Text(post.content),
+            post.postType == 'Announcement' ? Text('') : _buildPostType(),
+            _buildStatistic(),
+          ],
+        ),
       ),
     );
   }
@@ -73,18 +81,19 @@ class PostItem extends StatelessWidget {
 
   Widget _buildPostType() {
     var btnTitle = '';
-    var icon = post.postType == 'File'
+    var icon = post.postType.contains('File')
         ? Icon(FontAwesomeIcons.fileArchive, color: Colors.deepOrangeAccent)
         : Icon(FontAwesomeIcons.book, color: Colors.grey);
-    if (post.postType == 'File' || post.postType == 'Assigment') {
+    if (post.postType.contains('File') || post.postType.contains('Assigment')) {
       btnTitle = 'Download';
     } else {
       btnTitle = 'Answer';
       icon = Icon(FontAwesomeIcons.solidQuestionCircle, color: Colors.blue);
     }
 
-    var postType =
-        post.postType == 'Question' ? "Where is Cambodia?" : post.postType;
+    var postType = post.postType.contains('Question')
+        ? "Where is Cambodia?"
+        : post.postType;
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 15),

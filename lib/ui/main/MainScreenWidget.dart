@@ -2,13 +2,23 @@ import 'package:flutter/material.dart';
 import '../drawer/MyDrawer.dart';
 import '../buttom_tab_bar/MainButtomBarWidget.dart';
 import '../my_class/my_class_list_screen.dart';
-import '../../resources/my_class_api_provider.dart';
 import '../../models/my_class_model.dart';
+<<<<<<< HEAD
 import '../create_class/CreateClass.dart';
 import '../new_notification/NewNotification.dart';
 import 'package:firebase_database/firebase_database.dart';
+=======
+import '../../models/post_model.dart';
+import '../widgets/loading_indicator.dart';
+import '../new_feeds/new_feed_list.dart';
+>>>>>>> 9c127cd6e9e849477d03f8476cb2e7109c11de9c
 
 class MainScreenWidget extends StatefulWidget {
+  final Future<List<MyClassModel>> myClasses;
+  final Future<List<PostModel>> posts;
+
+  MainScreenWidget({this.myClasses, this.posts});
+
   @override
   _MainScreenWidgetState createState() => _MainScreenWidgetState();
 }
@@ -16,6 +26,7 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget>
     with SingleTickerProviderStateMixin {
   var tabController;
+<<<<<<< HEAD
   DatabaseReference itemRef;
   MyClassModel _myClass;
 
@@ -41,12 +52,15 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
   void joinClass(){
     
   }
+=======
+  int currentIndex = 0;
+  final List<String> titles = ["New Feeds", "My Class", "Notification"];
+>>>>>>> 9c127cd6e9e849477d03f8476cb2e7109c11de9c
 
   @override
   void initState() {
     super.initState();
     tabController = new TabController(vsync: this, length: 3);
-    initMyClassData();
   }
 
   void onIconsDarkMenuPressed(BuildContext context) {}
@@ -76,6 +90,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
   void selectPage(int position) {
     setState(() {
       tabController.animateTo(position);
+      currentIndex = position;
     });
   }
 
@@ -87,7 +102,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
         child: Scaffold(
           appBar: AppBar(
             brightness: Brightness.dark,
-            title: Text(" Feeds"),
+            title: Text(titles.elementAt(currentIndex)),
             actions: [
               IconButton(
                 onPressed: () => this.onShapePressed(context),
@@ -99,12 +114,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
           body: TabBarView(
             controller: tabController,
             children: [
-              Container(
-                color: Colors.yellow,
-              ),
-              Container(
-                child: MyClassListScreen()
-              ),
+              _buildNewFeedsTab(),
+              _buildMyClassTab(),
               Container(
                 child: NewNotification(),
               ),
@@ -114,6 +125,25 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
           backgroundColor: Colors.white,
         ),
       ),
+    );
+  }
+
+  Widget _buildMyClassTab() {
+    return FutureBuilder(future: Future(() async {
+      Future.delayed(Duration(seconds: 3), () {});
+      return await widget.myClasses;
+    }), builder:
+        (BuildContext context, AsyncSnapshot<List<MyClassModel>> myClasses) {
+      if (myClasses.data == null) return LoadingIndicator();
+      return Container(
+        child: MyClassListScreen(),
+      );
+    });
+  }
+
+  Widget _buildNewFeedsTab() {
+    return Container(
+      child: NewFeedList(posts: widget.posts),
     );
   }
 }

@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "by": "Vichit Pov",
+        "createdAt": "a minute ago",
+        "postId": 1
+    },
+    {
+        "id": 2,
+        "by": "Koe Romchong",
+        "createdAt": "an hour ago",
+        "postId": 1
+    },
+    {
+        "id": 3,
+        "by": "Keo Sokpheng",
+        "createdAt": "a week ago",
+        "postId": 2
+    },
+    {
+        "id": 4,
+        "by": "Vorn Viva",
+        "createdAt": "a minute ago",
+        "postId": 1
+    },
+    {
+        "id": 5,
+        "by": "Pich Mtes Kmang",
+        "createdAt": "12 minutes ago",
+        "postId": 3
+    }
+]

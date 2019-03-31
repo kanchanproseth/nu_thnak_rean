@@ -2,14 +2,14 @@
 
 class PostModel {
   final int id;
-  final String by;
+  String by;
   final int numberOfComments;
   final int numberOfAnswers;
   final int numberOfDownloads;
   final String content;
   final String createdAt;
   String postType;
-  final String status;
+  String status;
 
   PostModel.fromJson(Map<String, dynamic> parsedJson)
       : id = parsedJson['id'],

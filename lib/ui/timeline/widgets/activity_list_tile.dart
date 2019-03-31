@@ -6,54 +6,53 @@ class ActivityListTile extends StatelessWidget {
   final bool shouldShowSwitch;
   final Function onSwitchValueChange;
   final bool switchValue;
+  final Function onItemPressed;
 
   ActivityListTile(
       {this.title,
-      this.shouldShowArrow = false,
+      this.shouldShowArrow = true,
       this.shouldShowSwitch = false,
-      this.onSwitchValueChange = null,
-      this.switchValue = true});
+      this.onSwitchValueChange,
+      this.switchValue = true,
+      this.onItemPressed});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(right: 10),
-                  color: Colors.grey,
-                  width: 20,
-                  height: 20,
-                ),
-                Text(title),
-                Spacer(flex: 1),
-                shouldShowArrow
-                    ? Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.grey,
-                        size: 15,
-                      )
-                    : shouldShowSwitch
-                        ? Switch(
-                            value: switchValue,
-                            onChanged: (bool value) {
-                              onSwitchValueChange(value);
-                            },
-                            activeColor: Colors.teal,
-                          )
-                        : Spacer(flex: 1)
-              ],
+    return GestureDetector(
+      onTap: () {
+        onItemPressed(title);
+      },
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+              child: Row(
+                children: <Widget>[
+                  Text(title),
+                  Spacer(flex: 1),
+                  shouldShowSwitch
+                      ? Switch(
+                          value: switchValue,
+                          onChanged: (bool value) {
+                            onSwitchValueChange(value);
+                          },
+                          activeColor: Colors.teal,
+                        )
+                      : Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.grey,
+                          size: 15,
+                        )
+                ],
+              ),
             ),
-          ),
-          Divider(
-            height: 0.8,
-          )
-        ],
+            Divider(
+              height: 0.8,
+            )
+          ],
+        ),
       ),
     );
   }
