@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/post_model.dart';
 import '../timeline/post_item.dart';
-import '../../models/my_class_model.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widgets/loading_indicator.dart';
 
 class NewFeedList extends StatelessWidget {

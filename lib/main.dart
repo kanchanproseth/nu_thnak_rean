@@ -10,6 +10,9 @@ import './ui/timeline/my_activities/my_posts_list.dart';
 import './resources/user_api_provider.dart';
 import './ui/timeline/my_activities/class_member_list.dart';
 import './ui/timeline/my_activities/add_class_member.dart';
+import './ui/timeline/post_detail.dart';
+import './resources/comment_api_provider.dart';
+import './models/comment_model.dart';
 
 void main() => runApp(MyApp());
 
@@ -71,6 +74,14 @@ class MyApp extends StatelessWidget {
           title: filterValue,
           posts: posts,
         );
+      });
+    } else if (settings.name.contains("/post_detail")) {
+      return MaterialPageRoute(builder: (BuildContext context) {
+        final postId =
+            int.parse(settings.name.replaceFirst("/post_detail/", ""));
+        final comments = CommentApiProvider.fetchCommentList(context);
+        final post = PostApiProvider.fetchPostById(context, postId);
+        return PostDetail(post: post, comments: comments);
       });
     }
     return MaterialPageRoute(builder: (BuildContext context) {
