@@ -25,7 +25,6 @@ class _MyClassListScreenState extends State<MyClassListScreen> {
     itemRef = database.reference().child('my_classes');
     itemRef.onChildAdded.listen(_onEntryAdded);
     itemRef.onChildChanged.listen(_onEntryChanged);
-    print(myClasses.length);
   }
 
   _onEntryAdded(Event event) {

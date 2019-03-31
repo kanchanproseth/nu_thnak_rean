@@ -27,15 +27,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
   MyClassModel _myClass;
 
   List<MyClassModel> myClasses;
-  void initMyClassData() async {
-    //mock
-    // myClasses = await MyClassApiProvider.fetchMyClassList(context);
-    // final FirebaseDatabase database = FirebaseDatabase.instance;
-    // itemRef = database.reference().child('my_classes');
-    // for (_myClass in myClasses){
-    //   itemRef.push().set(_myClass.toJson());
-    // }
-    
+  void initMyClassData() async {  
   }
 
   void createClass(){
