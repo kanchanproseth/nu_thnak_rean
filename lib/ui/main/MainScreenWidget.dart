@@ -77,6 +77,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
 
   Widget _buildMyClassTab() {
     return FutureBuilder(future: Future(() async {
+      Future.delayed(Duration(seconds: 3), () {});
       return await widget.myClasses;
     }), builder:
         (BuildContext context, AsyncSnapshot<List<MyClassModel>> myClasses) {

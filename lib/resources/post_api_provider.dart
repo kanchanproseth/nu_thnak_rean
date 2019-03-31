@@ -57,4 +57,10 @@ class PostApiProvider {
     }).toList();
     return posts;
   }
+
+  static Future<PostModel> fetchPostById(BuildContext context, int id) async {
+    final posts = await PostApiProvider.fetchPostList(context);
+    final post = posts.firstWhere((post) => post.id == id);
+    return post; 
+  }
 }

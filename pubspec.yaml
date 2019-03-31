@@ -59,6 +59,7 @@ flutter:
    - my_class_list_mock_data.json
    - post_list_mock_data.json
    - user_list_mock_data.json
+   - comment_list_mock_data.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
