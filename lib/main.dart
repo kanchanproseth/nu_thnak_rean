@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "NU Tnak Rean",
+        title: "NU Class Room",
         theme: Theme.of(context).copyWith(
       accentIconTheme: Theme.of(context).accentIconTheme.copyWith(
         color: Colors.white
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           .primaryTextTheme
           .apply(bodyColor: Colors.white)),
         onGenerateRoute: routes,
-        home: MainScreenWidget());
+        home: MySplashScreen());
   }
 
   Route routes(RouteSettings settings) {

@@ -10,6 +10,7 @@ class MyClassApiProvider {
     final List<dynamic> results = json.decode(response);
     final data =
         results.map((parsedJson) => MyClassModel.fromJson(parsedJson)).toList();
+        print(data);
     return data;
   }
 

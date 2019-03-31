@@ -12,6 +12,6 @@ class NewNotification extends StatefulWidget {
 class _NewNotificationState extends State<NewNotification> {
   @override
   Widget build(BuildContext context) {
-    return EmptyStateWidget();
+    return EmptyStateWidget(title: "No notification available",);
   }
 }

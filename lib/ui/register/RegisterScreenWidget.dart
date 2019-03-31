@@ -4,6 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import '../main/MainScreenWidget.dart';
+import 'package:firebase_database/firebase_database.dart';
+import '../../models/user.dart';
 
 class RegisterScreenWidget extends StatefulWidget {
   final String userid;
@@ -15,26 +17,57 @@ class RegisterScreenWidget extends StatefulWidget {
 
 class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
   var imageURL;
-
   var database = FirebaseDatabase.instance;
-
   var storage = FirebaseStorage.instance;
-
   var firstNameTextController =TextEditingController();
   var lastNameTextController =TextEditingController();
+  UserData myUserData;
+  DatabaseReference userRef;
 
-  void onButtonSignInPressed(BuildContext context) {
-    database.reference().child("usersData").child('id').set({
-      'userId':widget.userid,
-      "image" :imageURL,
-      "firstname": firstNameTextController.text,
-      "lastname":lastNameTextController.text
-    }).then((_) =>{
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final FirebaseDatabase database = FirebaseDatabase.instance; //Rather then just writing FirebaseDatabase(), get the instance.  
+    userRef = database.reference().child('$widget.userid');
+    userRef.onChildAdded.listen(_onEntryAdded);
+  }
+
+  _onEntryAdded(Event event) {
+    setState(() {
+      // add Sucess
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => MainScreenWidget()),
-        (Route<dynamic> route) => false)
+        (Route<dynamic> route) => false);
     });
+  }
 
+  void _showSnackBar(String text, BuildContext context) {
+      final snackBar = SnackBar(
+        duration: Duration(milliseconds: 500),
+        content: Container(
+            height: 30.0,
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(fontSize: 16.0),
+              ),
+            )),
+        backgroundColor: Colors.red,
+      );
+      Scaffold.of(context).showSnackBar(snackBar);
+  }
+
+  void onButtonSignInPressed(BuildContext context) {
+    if (firstNameTextController.text.isNotEmpty && lastNameTextController.text.isNotEmpty){
+      myUserData.imageURL =imageURL;
+      myUserData.firstName =firstNameTextController.text;
+      myUserData.lastName =lastNameTextController.text;
+      userRef.push().set(myUserData.toJson());
+    }else{
+      this._showSnackBar("Please enter all field", context);
+    }
+    
   }
 
   void openCamera() {

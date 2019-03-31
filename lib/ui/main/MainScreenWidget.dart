@@ -6,6 +6,7 @@ import '../../resources/my_class_api_provider.dart';
 import '../../models/my_class_model.dart';
 import '../create_class/CreateClass.dart';
 import '../new_notification/NewNotification.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class MainScreenWidget extends StatefulWidget {
   @override
@@ -15,10 +16,19 @@ class MainScreenWidget extends StatefulWidget {
 class _MainScreenWidgetState extends State<MainScreenWidget>
     with SingleTickerProviderStateMixin {
   var tabController;
+  DatabaseReference itemRef;
+  MyClassModel _myClass;
 
   List<MyClassModel> myClasses;
   void initMyClassData() async {
-    myClasses = await MyClassApiProvider.fetchMyClassList(context);
+    //mock
+    // myClasses = await MyClassApiProvider.fetchMyClassList(context);
+    // final FirebaseDatabase database = FirebaseDatabase.instance;
+    // itemRef = database.reference().child('my_classes');
+    // for (_myClass in myClasses){
+    //   itemRef.push().set(_myClass.toJson());
+    // }
+    
   }
 
   void createClass(){
@@ -93,9 +103,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
                 color: Colors.yellow,
               ),
               Container(
-                child: MyClassListScreen(
-                  myClasses: myClasses,
-                ),
+                child: MyClassListScreen()
               ),
               Container(
                 child: NewNotification(),

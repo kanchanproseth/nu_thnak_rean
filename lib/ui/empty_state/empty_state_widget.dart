@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class EmptyStateWidget extends StatelessWidget {
+  final String title;
+
+  const EmptyStateWidget({Key key, this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +20,9 @@ class EmptyStateWidget extends StatelessWidget {
                               margin: EdgeInsets.all(10),
                               child: Image.asset(
                                   'assets/empty_notification.png'))),
-                      Text("No Data Available", textAlign: TextAlign.center)
+                      Text(this.title, 
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold))
                     ]))));
   }
 }

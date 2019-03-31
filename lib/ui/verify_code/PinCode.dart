@@ -3,7 +3,10 @@ import 'package:pinput/pin_put/pin_put.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pinput/pin_put/pin_put_bloc.dart';
 import 'package:pinput/pin_put/pin_put_state.dart';
+import 'package:firebase_database/firebase_database.dart';
 import '../register/RegisterScreenWidget.dart';
+import '../../models/user.dart';
+import '../main/MainScreenWidget.dart';
 
 class PinCode extends StatefulWidget {
   final String verificationId;
@@ -21,12 +24,23 @@ class PinCodeState extends State<PinCode> {
   // var pin_put_bloc = PinPutBloc();
   // var pin_put_state = PinPutState();
   String userid;
+  UserData myUserData;
+  DatabaseReference userRef;
 
   void navigateToRegister(BuildContext context, String userID) {
-    Navigator.push(
+    final FirebaseDatabase database = FirebaseDatabase.instance; //Rather then just writing FirebaseDatabase(), get the instance.  
+    userRef = database.reference().child('$widget.userid');
+    if (userRef == null) {
+      Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => RegisterScreenWidget(userid: userID)));
+    }else{
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => MainScreenWidget()),
+        (Route<dynamic> route) => false);
+    }
+    
   }
 
   Future<bool> _signInWithPhoneNumber(
