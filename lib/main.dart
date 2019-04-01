@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import './ui/login/LoginScreenWidget.dart';
 import './ui/main/MainScreenWidget.dart';
 import './ui/splash_screen/MySplashScreenState.dart';
-import './ui/create_class/CreateClass.dart';
 import './ui/timeline/timeline_screen.dart';
 import './resources/post_api_provider.dart';
 import './resources/my_class_api_provider.dart';
@@ -12,11 +10,26 @@ import './ui/timeline/my_activities/class_member_list.dart';
 import './ui/timeline/my_activities/add_class_member.dart';
 import './ui/timeline/post_detail.dart';
 import './resources/comment_api_provider.dart';
-import './models/comment_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import './ui/widgets/loading_indicator.dart';
+import './ui/empty_state/empty_state_widget.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final myClasses = MyClassApiProvider.fetchMyClassList(context);
@@ -24,20 +37,48 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: "NU Class Room",
         theme: Theme.of(context).copyWith(
-      accentIconTheme: Theme.of(context).accentIconTheme.copyWith(
-        color: Colors.white
-      ),
-      accentColor: Colors.amber,
-      primaryColor: Colors.amber,
-      primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
-        color: Colors.white
-      ),
-      primaryTextTheme: Theme
-          .of(context)
-          .primaryTextTheme
-          .apply(bodyColor: Colors.white)),
+            accentIconTheme:
+                Theme.of(context).accentIconTheme.copyWith(color: Colors.white),
+            accentColor: Colors.amber,
+            primaryColor: Colors.amber,
+            primaryIconTheme: Theme.of(context)
+                .primaryIconTheme
+                .copyWith(color: Colors.white),
+            primaryTextTheme: Theme.of(context)
+                .primaryTextTheme
+                .apply(bodyColor: Colors.white)),
         onGenerateRoute: routes,
-        home: MySplashScreen());
+        home: Container(
+            constraints: BoxConstraints.expand(),
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 244, 244, 244),
+            ),
+            child: FutureBuilder<bool>(
+              future: _checkLogin(), // async work
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return LoadingIndicator();
+                  default:
+                    if (snapshot.hasError)
+                      return EmptyStateWidget(title: "Something went wrong");
+                    else if (snapshot.data == true)
+                      return MainScreenWidget();
+                    else
+                      return MySplashScreen();
+                }
+              },
+            )));
+  }
+
+  Future<bool> _checkLogin() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    var checkValue = sharedPreferences.getBool("check");
+    print(checkValue);
+    if (checkValue == null) {
+      sharedPreferences.setBool('check', false);
+    }
+    return sharedPreferences.getBool("check");
   }
 
   Route routes(RouteSettings settings) {

@@ -6,6 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import '../main/MainScreenWidget.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../../models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
 
 class RegisterScreenWidget extends StatefulWidget {
   final String userid;
@@ -16,7 +18,7 @@ class RegisterScreenWidget extends StatefulWidget {
 }
 
 class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
-  var imageURL;
+  String imageURL;
   var database = FirebaseDatabase.instance;
   var storage = FirebaseStorage.instance;
   var firstNameTextController =TextEditingController();
@@ -28,8 +30,9 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    myUserData = UserData();
     final FirebaseDatabase database = FirebaseDatabase.instance; //Rather then just writing FirebaseDatabase(), get the instance.  
-    userRef = database.reference().child('$widget.userid');
+    userRef = database.reference().child('user_data');
     userRef.onChildAdded.listen(_onEntryAdded);
   }
 
@@ -58,12 +61,19 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
       Scaffold.of(context).showSnackBar(snackBar);
   }
 
-  void onButtonSignInPressed(BuildContext context) {
+  void onButtonSignInPressed(BuildContext context) async {
     if (firstNameTextController.text.isNotEmpty && lastNameTextController.text.isNotEmpty){
-      myUserData.imageURL =imageURL;
-      myUserData.firstName =firstNameTextController.text;
-      myUserData.lastName =lastNameTextController.text;
+      myUserData.imageURL = imageURL;
+      myUserData.firstName = firstNameTextController.text;
+      myUserData.lastName = lastNameTextController.text;
       userRef.push().set(myUserData.toJson());
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('uid', widget.userid);
+      await prefs.setString('image_url', imageURL);
+      await prefs.setString('first_name', firstNameTextController.text);
+      await prefs.setString('last_name', lastNameTextController.text);
+      await prefs.setBool('check', true);
+      
     }else{
       this._showSnackBar("Please enter all field", context);
     }
@@ -135,14 +145,15 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
               );
   }
 
-  uploadImage(var imageFile) async {
-    StorageReference ref = storage.ref().child("/photo.jpg");
-    StorageUploadTask uploadTask = ref.putFile(imageFile);
-
+  uploadImage(File image) async {
+    StorageReference ref = storage.ref().child("/${image.path}.jpg");
+    StorageUploadTask uploadTask = ref.putFile(image);
+    
     var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
     var url = dowurl.toString();
-    this.imageURL = url;
-    setState(() {});
+    setState(() {
+      this.imageURL = url;
+    });
   }
 
   Future<void> _optionsDialogBox(BuildContext context) {
@@ -223,6 +234,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
             constraints: BoxConstraints.expand(height: 42),
             margin: EdgeInsets.only(left: 43, top: 16, right: 43),
             child: TextField(
+              controller: lastNameTextController,
               decoration: InputDecoration(
                 hintText: "Last name",
                 border: OutlineInputBorder(
@@ -244,6 +256,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
             constraints: BoxConstraints.expand(height: 42),
             margin: EdgeInsets.only(left: 43, top: 42, right: 43),
             child: TextField(
+              controller: firstNameTextController,
               decoration: InputDecoration(
                 hintText: "First name",
                 border: OutlineInputBorder(
