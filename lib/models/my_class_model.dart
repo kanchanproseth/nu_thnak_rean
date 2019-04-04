@@ -3,6 +3,7 @@ import './member.dart';
 
 class MyClassModel {
 String id;
+String key;
 String name;
 String desc;
 List<dynamic> member;
@@ -10,7 +11,7 @@ String section;
 String room;
 String subject;
 
-MyClassModel({this.id, this.name, this.desc, this.member, this.section, this.room, this.subject});
+MyClassModel({this.id, this.key, this.name, this.desc, this.member, this.section, this.room, this.subject});
 
   MyClassModel.fromJson(Map<String, dynamic> parsedJson)
     : id = parsedJson['id'],
@@ -22,7 +23,8 @@ MyClassModel({this.id, this.name, this.desc, this.member, this.section, this.roo
       subject = parsedJson['subject'];
 
     MyClassModel.fromSnapshot(DataSnapshot snapshot) :
-    id = snapshot.key,
+    id =snapshot.value['id'],
+    key = snapshot.key,
     name = snapshot.value['name'],
     desc = snapshot.value['description'],
     member = snapshot.value['member'],
@@ -32,6 +34,7 @@ MyClassModel({this.id, this.name, this.desc, this.member, this.section, this.roo
 
     toJson(){
       return {
+        'id' :id,
         'name' : name,
         'description' : desc,
         'member' : member,

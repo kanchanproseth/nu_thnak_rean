@@ -92,9 +92,10 @@ class _MyAppState extends State<MyApp> {
             PostApiProvider.fetchPostListByType(context, 'Question');
         final announcements =
             PostApiProvider.fetchPostListByType(context, 'Announcement');
-        final myClassId =
-            int.parse(settings.name.replaceFirst("/timeline/", ""));
-        final myClass = MyClassApiProvider.fetchMyClassById(context, myClassId);
+        final augs = settings.arguments;
+        var id = augs as String;
+
+        final myClass = MyClassApiProvider.fetchMyClassById(context, id);
         return TimelineScreen(
           posts: posts,
           myClass: myClass,
@@ -115,7 +116,7 @@ class _MyAppState extends State<MyApp> {
             final members = UserApiProvider.fetchMyClassList(context);
             return ClassMemeberList(members: members);
           case 'Add Member':
-            final myClass = MyClassApiProvider.fetchMyClassById(context, 1);
+            final myClass = MyClassApiProvider.fetchMyClassById(context, '1');
             final members = UserApiProvider.fetchMyClassList(context);
             return AddClassMember(members: members, myClass: myClass);
           default:

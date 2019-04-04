@@ -15,7 +15,7 @@ class MyClassApiProvider {
   }
 
   static Future<MyClassModel> fetchMyClassById(
-      BuildContext context, int id) async {
+      BuildContext context, String id) async {
     final classes = await MyClassApiProvider.fetchMyClassList(context);
     final myClass = classes.where((cl) => cl.id == id).first;
     return myClass;

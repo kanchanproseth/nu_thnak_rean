@@ -7,7 +7,7 @@ import '../create_class/CreateClass.dart';
 import '../new_notification/NewNotification.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../../models/post_model.dart';
-import '../widgets/loading_indicator.dart';
+import '../../resources/my_class_api_provider.dart';
 import '../new_feeds/new_feed_list.dart';
 
 class MainScreenWidget extends StatefulWidget {
@@ -27,7 +27,15 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
   MyClassModel _myClass;
 
   List<MyClassModel> myClasses;
-  void initMyClassData() async {  
+  void initMyClassData() async {
+    // mock
+    myClasses = await MyClassApiProvider.fetchMyClassList(context);
+    final FirebaseDatabase database = FirebaseDatabase.instance;
+    itemRef = database.reference().child('my_classes');
+    for (_myClass in myClasses){
+      itemRef.push().set(_myClass.toJson());
+    }
+    
   }
 
   void createClass(){
@@ -47,6 +55,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
   void initState() {
     super.initState();
     tabController = new TabController(vsync: this, length: 3);
+    initMyClassData();
   }
 
   void onIconsDarkMenuPressed(BuildContext context) {}
