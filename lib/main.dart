@@ -13,6 +13,9 @@ import './resources/comment_api_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './ui/widgets/loading_indicator.dart';
 import './ui/empty_state/empty_state_widget.dart';
+import './ui/timeline/my_activities/answer_screen.dart';
+import './ui/timeline/my_activities/question_reply_list.dart';
+import './ui/timeline/my_activities/member_answer.dart';
 
 void main() => runApp(MyApp());
 
@@ -63,7 +66,10 @@ class _MyAppState extends State<MyApp> {
                     if (snapshot.hasError)
                       return EmptyStateWidget(title: "Something went wrong");
                     else if (snapshot.data == true)
-                      return MainScreenWidget();
+                      return MainScreenWidget(
+                        posts: posts,
+                        myClasses: myClasses,
+                      );
                     else
                       return MySplashScreen();
                 }
@@ -92,10 +98,10 @@ class _MyAppState extends State<MyApp> {
             PostApiProvider.fetchPostListByType(context, 'Question');
         final announcements =
             PostApiProvider.fetchPostListByType(context, 'Announcement');
-        final augs = settings.arguments;
-        var id = augs as String;
+        // final augs = settings.arguments;
+        var name = settings.name.replaceFirst("/timeline/", "");
 
-        final myClass = MyClassApiProvider.fetchMyClassById(context, id);
+        final myClass = MyClassApiProvider.fetchMyClassById(context, name);
         return TimelineScreen(
           posts: posts,
           myClass: myClass,
@@ -116,7 +122,8 @@ class _MyAppState extends State<MyApp> {
             final members = UserApiProvider.fetchMyClassList(context);
             return ClassMemeberList(members: members);
           case 'Add Member':
-            final myClass = MyClassApiProvider.fetchMyClassById(context, '1');
+            final myClass = MyClassApiProvider.fetchMyClassById(
+                context, 'Master E-commerce 01');
             final members = UserApiProvider.fetchMyClassList(context);
             return AddClassMember(members: members, myClass: myClass);
           default:
@@ -134,6 +141,23 @@ class _MyAppState extends State<MyApp> {
         final comments = CommentApiProvider.fetchCommentList(context);
         final post = PostApiProvider.fetchPostById(context, postId);
         return PostDetail(post: post, comments: comments);
+      });
+    } else if (settings.name.contains("/answer")) {
+      return MaterialPageRoute(builder: (BuildContext context) {
+        // final postId = int.parse(settings.name.replaceFirst("/answer/", ""));
+        return AnswerScreen();
+      });
+    } else if (settings.name.contains("/question")) {
+      return MaterialPageRoute(builder: (BuildContext context) {
+        // final postId = int.parse(settings.name.replaceFirst("/question/", ""));
+        final members = PostApiProvider.fetchPostList(context);
+        return QuestionReplyList(members: members);
+      });
+    } else if (settings.name.contains("/member_answer")) {
+      return MaterialPageRoute(builder: (BuildContext context) {
+        final answeredBy =
+            settings.name.replaceFirst('/member_answer/', "");
+        return MemberAnswerScreen(selectedAnswer: 1, memberName: answeredBy);
       });
     }
     return MaterialPageRoute(builder: (BuildContext context) {

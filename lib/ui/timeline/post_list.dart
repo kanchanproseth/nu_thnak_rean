@@ -143,7 +143,7 @@ class PostList extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${myClass.data.member} Member',
+                      '${myClass.data.member.length} Member',
                       style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.normal,
