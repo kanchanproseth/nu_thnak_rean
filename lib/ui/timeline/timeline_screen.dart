@@ -8,6 +8,7 @@ import './question_list.dart';
 import './announcement_list.dart';
 import './class_activity_list.dart';
 import '../../models/my_class_model.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TimelineScreen extends StatefulWidget {
   final Future<List<PostModel>> posts;
@@ -44,7 +45,37 @@ class _TimelineScreenState extends State<TimelineScreen>
 
   void onIconsDarkMenuPressed(BuildContext context) {}
 
-  void onShapePressed(BuildContext context) {}
+  void onShapePressed(BuildContext context) {
+     showModalBottomSheet(
+    context: context,
+    builder: (context) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            leading: Icon(FontAwesomeIcons.solidQuestionCircle),
+            title: Text('Assignment'),
+            // onTap: () => this.createClass(),          
+          ),
+          ListTile(
+            leading: Icon(FontAwesomeIcons.solidQuestionCircle),
+            title: Text('Question or Exam'),
+            // onTap: () => this.joinClass(),        
+          ),
+          ListTile(
+            leading: Icon(FontAwesomeIcons.fileExport),
+            title: Text('File'),
+            // onTap: () => this.createClass(),          
+          ),
+          ListTile(
+            leading: Icon(FontAwesomeIcons.bullhorn),
+            title: Text('Announcement'),
+            // onTap: () => this.joinClass(),        
+          ),
+        ],
+      );
+    });
+  }
 
   void selectedTab(int position) {
     setState(() {
