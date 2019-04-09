@@ -16,6 +16,8 @@ import './ui/empty_state/empty_state_widget.dart';
 import './ui/timeline/my_activities/answer_screen.dart';
 import './ui/timeline/my_activities/question_reply_list.dart';
 import './ui/timeline/my_activities/member_answer.dart';
+import './ui/timeline/upload/assignment_upload_screen.dart';
+import './ui/widgets/PDFViewer.dart';
 
 void main() => runApp(MyApp());
 
@@ -155,9 +157,17 @@ class _MyAppState extends State<MyApp> {
       });
     } else if (settings.name.contains("/member_answer")) {
       return MaterialPageRoute(builder: (BuildContext context) {
-        final answeredBy =
-            settings.name.replaceFirst('/member_answer/', "");
+        final answeredBy = settings.name.replaceFirst('/member_answer/', "");
         return MemberAnswerScreen(selectedAnswer: 1, memberName: answeredBy);
+      });
+    } else if (settings.name.contains("/assignment_upload")) {
+      return MaterialPageRoute(builder: (BuildContext context) {
+        return AssigmentUploadScreen();
+      });
+    } else if (settings.name.contains("/view_pdf")) {
+      return MaterialPageRoute(builder: (BuildContext context) {
+        final path = settings.name.replaceFirst("/view_pdf/", "");
+        return PDFViewer(path);
       });
     }
     return MaterialPageRoute(builder: (BuildContext context) {

@@ -43,8 +43,6 @@ class _TimelineScreenState extends State<TimelineScreen>
   int currentIndex = 0;
   var _widgetOptions;
 
-  void onIconsDarkMenuPressed(BuildContext context) {}
-
   void onShapePressed(BuildContext context) {
      showModalBottomSheet(
     context: context,
@@ -55,7 +53,9 @@ class _TimelineScreenState extends State<TimelineScreen>
           ListTile(
             leading: Icon(FontAwesomeIcons.solidQuestionCircle),
             title: Text('Assignment'),
-            // onTap: () => this.createClass(),          
+            onTap: () {
+              Navigator.pushNamed(context, "/assignment_upload");
+            },          
           ),
           ListTile(
             leading: Icon(FontAwesomeIcons.solidQuestionCircle),
