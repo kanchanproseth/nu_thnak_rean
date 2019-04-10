@@ -6,7 +6,8 @@
         "content": "This is type of Post File: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
         "createdAt": "2 Hours ago",
         "postType": "Question",
-        "status": "Active"
+        "status": "Active",
+        "question": "What is Ecommerce?"
     },
     {
         "id": 2,
@@ -45,7 +46,8 @@
         "content": "This is type of Member post to ask something: Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC…",
         "createdAt": "2 Hours ago",
         "postType": "Question",
-        "status": "Active"
+        "status": "Active",
+        "question": "What is Ecommerce?"
     },
     {
         "id": 6,

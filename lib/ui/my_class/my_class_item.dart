@@ -46,7 +46,7 @@ class MyClassItem extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pushNamed(context, "/timeline/${item.id}");
+        Navigator.pushNamed(context, "/timeline/${item.name}");
       },
     );
   }

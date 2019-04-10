@@ -10,6 +10,7 @@ class PostModel {
   final String createdAt;
   String postType;
   String status;
+  String question;
 
   PostModel.fromJson(Map<String, dynamic> parsedJson)
       : id = parsedJson['id'],
@@ -20,7 +21,8 @@ class PostModel {
         content =parsedJson['content'],
         createdAt = parsedJson['createdAt'],
         postType = parsedJson['postType'],
-        status = parsedJson['status'];
+        status = parsedJson['status'],
+        question = parsedJson['question'];
 
   @override
   String toString() {

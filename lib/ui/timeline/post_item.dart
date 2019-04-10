@@ -16,7 +16,8 @@ class PostItem extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           if (post.postType.contains("Question")) {
-            return ;
+            Navigator.pushNamed(context, "/question/${post.id}");
+            return;
           }
           Navigator.pushNamed(context, "/post_detail/${post.id}");
         },
@@ -24,7 +25,7 @@ class PostItem extends StatelessWidget {
           children: <Widget>[
             _buildHeader(),
             Text(post.content),
-            post.postType == 'Announcement' ? Text('') : _buildPostType(),
+            post.postType == 'Announcement' ? Text('') : _buildPostType(context),
             _buildStatistic(),
           ],
         ),
@@ -79,7 +80,7 @@ class PostItem extends StatelessWidget {
     );
   }
 
-  Widget _buildPostType() {
+  Widget _buildPostType(BuildContext context) {
     var btnTitle = '';
     var icon = post.postType.contains('File')
         ? Icon(FontAwesomeIcons.fileArchive, color: Colors.deepOrangeAccent)
@@ -92,7 +93,7 @@ class PostItem extends StatelessWidget {
     }
 
     var postType = post.postType.contains('Question')
-        ? "Where is Cambodia?"
+        ? post.question
         : post.postType;
 
     return Container(
@@ -122,7 +123,13 @@ class PostItem extends StatelessWidget {
               color: Colors.blue,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
-              onPressed: () {},
+              onPressed: () {
+                if (post.postType.contains("Question")) {
+                  Navigator.pushNamed(context, "/answer/${post.id}");
+                  return;
+                }
+                Navigator.pushNamed(context, "/post_detail/${post.id}");
+              },
             ),
           ),
         ],
