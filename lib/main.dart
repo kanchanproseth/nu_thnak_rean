@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
     final posts = PostApiProvider.fetchPostList(context);
     return MaterialApp(
         title: "NU Class Room",
+        debugShowCheckedModeBanner: false,
         theme: Theme.of(context).copyWith(
             accentIconTheme:
                 Theme.of(context).accentIconTheme.copyWith(color: Colors.white),
