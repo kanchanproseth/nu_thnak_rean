@@ -56,7 +56,7 @@ class CreateClass extends StatelessWidget {
   
     return Scaffold(
       appBar: AppBar(
-        // title: Text(this.title),
+        title: Text(this.title),
         backgroundColor: Colors.amber,
       ),
       body: Builder(builder: (BuildContext context){
